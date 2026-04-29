@@ -7,7 +7,7 @@ This crate deploys [FileBrowser Quantum](https://github.com/gtsteffaniak/filebro
 - `name: filebrowser-quantum`
 - `memory: 512Mi`
 - `cpu: 0.5`
-- `image: ghcr.io/gtsteffaniak/filebrowser:latest`
+- `image: ghcr.io/grycap/oscar-filebrowser:latest`
 - `api_port: 80`
 
 ## Existing Volume
@@ -25,6 +25,8 @@ Before deploying, set `volume.name` to the existing volume you want to browse:
 - `FILEBROWSER_SOURCE_PATH`
 
 For MinIO-backed deployments through the dashboard, the service can instead use OSCAR `mount` and set `FILEBROWSER_SOURCE_PATH` to the mounted path under `/mnt`.
+
+The image is a minimal wrapper around the upstream FileBrowser Quantum image. It keeps FileBrowser Quantum `latest`, including JWT support, and runs it as `root` so dashboard-created browser instances can inspect OSCAR volumes containing root-owned service data.
 
 ## Access
 
