@@ -7,7 +7,7 @@ This crate deploys [FileBrowser Quantum](https://github.com/gtsteffaniak/filebro
 - `name: filebrowser-quantum`
 - `memory: 512Mi`
 - `cpu: 0.5`
-- `image: ghcr.io/gtsteffaniak/filebrowser:1.2.4-stable`
+- `image: ghcr.io/gtsteffaniak/filebrowser:latest`
 - `api_port: 80`
 
 ## Existing Volume
@@ -25,8 +25,6 @@ Before deploying, set `volume.name` to the existing volume you want to browse:
 - `FILEBROWSER_SOURCE_PATH`
 
 For MinIO-backed deployments through the dashboard, the service can instead use OSCAR `mount` and set `FILEBROWSER_SOURCE_PATH` to the mounted path under `/mnt`.
-
-The FDL pins FileBrowser Quantum to `1.2.4-stable` because FileBrowser Quantum `1.3.x` changed the container default user to `filebrowser` (`1000:1000`). OSCAR volumes may contain service data owned by `root` with restrictive permissions, so the browser service needs the pre-1.3 root default to inspect arbitrary mounted service volumes.
 
 ## Access
 
@@ -50,4 +48,3 @@ The dashboard-generated JWT uses `FILEBROWSER_JWT_SUB` as the username, defaulti
 
 - FileBrowser stores its runtime config, database, and cache in `/home/filebrowser/data`.
 - Keep the service exposed with `rewrite_target: true` so FileBrowser runs under the OSCAR base path.
-- The image is intentionally pinned instead of using `latest` so dashboard-launched FileBrowser instances can browse root-owned OSCAR volumes.
